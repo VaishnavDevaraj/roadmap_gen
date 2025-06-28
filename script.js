@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // [ACTION REQUIRED FOR MOBILE]
     // Replace '127.0.0.1' with your computer's local network IP address for mobile testing.
     // e.g., 'http://192.168.1.12:5000/generate-learning-path'
-    const API_URL = 'http://192.168.1.6:5000/generate-learning-path';
+    const API_URL = 'https://roadmap-gen.onrender.com';
 
     // --- SVG drawing constants ---
     const NODE_MAX_TEXT_WIDTH = 550;

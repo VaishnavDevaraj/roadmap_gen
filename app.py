@@ -176,9 +176,25 @@ def generate_path():
         traceback.print_exc() 
         return jsonify({'error': 'An internal server error occurred', 'details': str(e)}), 500
 
+# [NEW] Add a dedicated health check endpoint for the cron job
+@app.route('/healthz', methods=['GET'])
+def health_check():
+    """
+    This endpoint is for the keep-alive service.
+    It returns a 204 No Content response, which is successful but has no body,
+    ensuring it's always smaller than any cron service's output limit.
+    """
+    return ('', 204)
+'''
 if __name__ == '__main__':
     print("Starting Flask server with Groq API integration on http://0.0.0.0:5000")
     print("Ensure you have 'groq' installed: pip install groq")
     print("Ensure GROQ_API_KEY is correctly set in app.py for local development.")
     app.run(debug=True, host='0.0.0.0', port=5000)
+'''
+
+if __name__ == '__main__':
+    # The host must be '0.0.0.0' to be accessible from outside the container
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
 

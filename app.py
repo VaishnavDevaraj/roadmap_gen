@@ -76,19 +76,18 @@ def generate_roadmap_with_groq(user_data):
     - **Career Aspiration/Goal:** "{career_aspiration}"
     - **Hours per day available for study:** {available_time_per_day}
 
-    Based on these details, generate a comprehensive learning path with the following characteristics:
-    1.  **Personalization:**
-        * **Adapt to Knowledge Level:** If the user has 'advanced' knowledge in a topic, suggest starting from intermediate/advanced modules, focusing on deeper concepts or skipping known basics. If 'beginner' or 'no experience', include foundational prerequisites and basic explanations.
+    Based on these details, generate a comprehensive learning path. **It is critical that you use the 'Current Knowledge Level' to tailor the starting point and content of the roadmap.**
+
+    Follow these characteristics:
+    1.  **Personalization (Most Important):**
+        * **Adapt to Knowledge Level:** This is the top priority. If the user has 'advanced' knowledge in a topic (e.g., 'knows Python basics'), the roadmap should **not** include introductory Python steps. Instead, start from intermediate concepts like data structures or web frameworks. If the user has 'no experience', the path MUST begin with foundational prerequisites.
         * **Consider Time:** The `estimated_time_days` for each step should be scaled based on `available_time_per_day`. Assume a baseline effort of 4 hours/day for the "typical" duration of a topic. If a user has less time, the days for each step should increase. If more time, days should decrease.
-        * **Include Tools/Frameworks/Techniques:** For each "concept" or "project" step, explicitly mention relevant tools, frameworks, libraries, specific technologies, and key techniques to learn in the `description`. Make it actionable and practical (e.g., "Use Python, Pandas, and Matplotlib").
     2.  **Structure and Content:**
         * Break down complex topics into digestible sub-topics.
         * Include a mix of "concept" (theoretical learning), "project" (hands-on application), and "assessment" (knowledge check) type steps.
         * Suggest practical project ideas to apply learned concepts.
         * Ensure a logical flow and progression through the topics, building upon previous steps.
         * The roadmap should have between 5 and 10 distinct steps.
-    3.  **Robustness for Unclear Aspirations:** If the 'Career Aspiration' is broad (e.g., "Software Developer") or very niche/unrecognized, infer a plausible general technology learning path and use general but relevant terms.
-    4.  **Final Calculation:** Calculate the `total_estimated_days` for the entire generated path based on the summed `estimated_time_days` of each step.
 
     Ensure the response is ONLY the JSON object, with no conversational text or markdown outside the JSON.
     """
@@ -97,14 +96,8 @@ def generate_roadmap_with_groq(user_data):
     try:
         chat_completion = groq_client.chat.completions.create(
             messages=[
-                {
-                    "role": "system",
-                    "content": "You are an expert career coach generating personalized learning roadmaps in strict JSON format."
-                },
-                {
-                    "role": "user",
-                    "content": prompt_text
-                }
+                {"role": "system", "content": "You are an expert career coach generating personalized learning roadmaps in strict JSON format, paying close attention to the user's prior knowledge."},
+                {"role": "user", "content": prompt_text}
             ],
             model="llama3-8b-8192",
             response_format={"type": "json_object"},

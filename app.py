@@ -174,13 +174,6 @@ def generate_path():
 @app.route("/health")
 def health_check():
     return "OK", 200
-'''
-if __name__ == '__main__':
-    print("Starting Flask server with Groq API integration on http://0.0.0.0:5000")
-    print("Ensure you have 'groq' installed: pip install groq")
-    print("Ensure GROQ_API_KEY is correctly set in app.py for local development.")
-    app.run(debug=True, host='0.0.0.0', port=5000)
-'''
 
 if __name__ == '__main__':
     # The host must be '0.0.0.0' to be accessible from outside the container

@@ -169,15 +169,11 @@ def generate_path():
         traceback.print_exc() 
         return jsonify({'error': 'An internal server error occurred', 'details': str(e)}), 500
 
-# [NEW] Add a dedicated health check endpoint for the cron job
-@app.route('/healthz', methods=['GET'])
+# Add this to your Roadmap Generator's main Flask file
+
+@app.route("/health")
 def health_check():
-    """
-    This endpoint is for the keep-alive service.
-    It returns a 204 No Content response, which is successful but has no body,
-    ensuring it's always smaller than any cron service's output limit.
-    """
-    return ('', 204)
+    return "OK", 200
 '''
 if __name__ == '__main__':
     print("Starting Flask server with Groq API integration on http://0.0.0.0:5000")

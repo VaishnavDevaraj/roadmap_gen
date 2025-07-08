@@ -171,9 +171,15 @@ def generate_path():
 
 # Add this to your Roadmap Generator's main Flask file
 
-@app.route("/health")
-def health_check():
-    return "OK", 200
+# ADD THIS NEW CODE
+from flask import request
+
+@app.before_request
+def before_request_func():
+    # Check if the request path is for the health check
+    if request.path == '/health':
+        # Return the simple "OK" response immediately
+        return "OK", 200
 
 if __name__ == '__main__':
     # The host must be '0.0.0.0' to be accessible from outside the container

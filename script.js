@@ -338,9 +338,23 @@ document.addEventListener('DOMContentLoaded', () => {
     function displayRoadmap(path, userData, totalEstimatedDays) {
         roadmapSvgContainer.innerHTML = '';
         roadmapSummaryDiv.innerHTML = `
-            <p>Roadmap for: <strong>${capitalizeWords(userData.careerAspirations)}</strong></p>
-            <p>Based on **${userData.availableTimePerDay} hours/day** of study.</p>
-            <p>Total estimated duration: <strong>${totalEstimatedDays} days</strong>.</p>
+        <div class="summary-header">
+            <h3>Your Personalized Path to Becoming a ${capitalizeWords(userData.careerAspirations)}</h3>
+        </div>
+        <div class="summary-details">
+            <div class="summary-item">
+                <span class="summary-label">Starting From:</span>
+                <span class="summary-value">${userData.knowledgeLevel || 'No prior experience specified'}</span>
+            </div>
+            <div class="summary-item">
+                <span class="summary-label">Daily Commitment:</span>
+                <span class="summary-value">${userData.availableTimePerDay} hours/day</span>
+            </div>
+            <div class="summary-item">
+                <span class="summary-label">Est. Duration:</span>
+                <span class="summary-value highlight">${totalEstimatedDays} Days</span>
+            </div>
+        </div>
         `;
 
         if (!path || path.length === 0) {

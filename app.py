@@ -19,13 +19,6 @@ def before_request_func():
 
 CORS(app)
 
-# --- Initialize Groq client ---
-# IMPORTANT: FOR LOCAL DEVELOPMENT ONLY, PASTE YOUR GROQ API KEY DIRECTLY HERE.
-# DO NOT COMMIT YOUR API KEY TO VERSION CONTROL (e.g., GitHub).
-# FOR PRODUCTION DEPLOYMENT, ALWAYS USE os.environ.get("GROQ_API_KEY").
-import os # Make sure 'import os' is at the top of the file
-
-# --- Initialize Groq client ---
 try:
     # The API key is now fetched from an environment variable
     groq_api_key = os.environ.get("GROQ_API_KEY")

@@ -59,9 +59,7 @@ This project is built with a modern, full-stack approach:
         
 *   **Deployment:**
     
-    *   **Frontend:** Deployed on Netlify
-        
-    *   **Backend:** Deployed on Render
+    *   Deployed through Cloud Run in GCP
         
 
 ### 🚀 Getting Started (Local Setup)

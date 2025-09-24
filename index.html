@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personalized Learning Roadmap</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <h1>Personalized Learning Roadmap</h1>
+            <p>Your unique path to knowledge and growth.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="introduction" class="card">
+            <h2>Unlock Your Potential</h2>
+            <p>Our AI-powered platform creates a tailored learning roadmap based on your current knowledge, career goals, and available time.</p>
+            <button id="startButton" class="btn primary">Generate My Roadmap</button>
+        </section>
+
+        <section id="assessment" class="card hidden">
+            <h2>Tell Us About Yourself</h2>
+            <form id="assessmentForm">
+                <div class="form-group">
+                    <label for="knowledgeLevel">What do you currently know?</label>
+                    <textarea id="knowledgeLevel" placeholder="e.g., 'Basic Python syntax', 'HTML/CSS but no JavaScript', 'Statistics fundamentals'" rows="3" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="careerAspirations">What do you want to become or learn?</label>
+                    <input type="text" id="careerAspirations" placeholder="e.g., 'Full-stack Developer', 'Data Scientist specializing in AI', 'Advanced C++ Programmer', 'Cybersecurity Analyst', 'Machine Learning Engineer'" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="availableTimePerDay">How many hours can you dedicate per day?</label>
+                    <!-- [MODIFIED] Input now has a realistic max value and a helper description -->
+                    <input type="number" id="availableTimePerDay" min="1" max="8" step="0.5" value="2" required>
+                    <p style="font-size: 0.85rem; color: #666; margin-top: 5px;">Please enter a realistic number (1-8 hours) for a sustainable learning pace.</p>
+                </div>
+
+                <button type="submit" class="btn primary">Generate Roadmap</button>
+            </form>
+        </section>
+
+        <section id="loading" class="card hidden">
+            <h2>Generating Your Roadmap...</h2>
+            <div class="spinner"></div>
+            <p>Our AI is crafting a unique learning journey just for you. This might take a moment.</p>
+        </section>
+
+        <section id="learningPath" class="card hidden">
+            <h2>Your Personalized Learning Roadmap</h2>
+            <div id="roadmapSummary" class="roadmap-summary">
+                <!-- Summary and total days will be injected here by JavaScript -->
+            </div>
+            <!-- Container for the SVG roadmap -->
+            <div id="roadmapSvgContainer">
+                <!-- SVG will be injected here by JavaScript -->
+            </div>
+            <div class="roadmap-actions">
+                <button id="downloadPngButton" class="btn secondary">Download Roadmap (PNG)</button>
+                <button id="downloadSvgButton" class="btn secondary">Download Roadmap (SVG)</button>
+                <button id="printRoadmapButton" class="btn secondary">Print Roadmap</button>
+                <button id="resetButton" class="btn tertiary">Start Over</button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2025 Personalized Learning Roadmap. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -67,30 +67,24 @@ def generate_roadmap_with_groq(user_data):
     }
 
     prompt_text = f"""
-    You are an expert career coach and personalized learning path generator.
-    Your task is to create a hyper-personalized, step-by-step learning roadmap for an individual.
-    The roadmap MUST be provided in a strict JSON format matching the following schema:
+    You are an elite career coach and AI roadmap designer. Your job is to carefully review and analyze the user's background, goals, and constraints before generating a learning roadmap.
+
+    First, deeply analyze the user's input:
+    - Current Knowledge Level: "{knowledge_level}"
+    - Career Aspiration/Goal: "{career_aspiration}"
+    - Hours per day available for study: {available_time_per_day}
+
+    Use this analysis to create a highly personalized, realistic, and actionable step-by-step roadmap. Your roadmap must:
+    1. Be tailored to the user's starting point, strengths, and gaps. Do not repeat what the user already knows.
+    2. Include only the most relevant concepts, projects, and assessments for the user's goal.
+    3. Provide a realistic timeline for each step and for the overall journey, based on the user's available time per day and the true effort required for mastery.
+    4. Clearly explain why each step is included and how it helps the user progress toward their goal.
+    5. Be concise, logical, and motivating. Avoid generic advice.
+    6. The roadmap should be top notch: actionable, clear, and tailored for maximum impact.
+    7. Use the following strict JSON schema for your response:
     {json.dumps(response_schema, indent=2)}
 
-    Here are the user's details:
-    - **Current Knowledge Level:** "{knowledge_level}"
-    - **Career Aspiration/Goal:** "{career_aspiration}"
-    - **Hours per day available for study:** {available_time_per_day}
-
-    Based on these details, generate a comprehensive learning path. **It is critical that you use the 'Current Knowledge Level' to tailor the starting point and content of the roadmap.**
-
-    Follow these characteristics:
-    1.  **Personalization (Most Important):**
-        * **Adapt to Knowledge Level:** This is the top priority. If the user has 'advanced' knowledge in a topic (e.g., 'knows Python basics'), the roadmap should **not** include introductory Python steps. Instead, start from intermediate concepts like data structures or web frameworks. If the user has 'no experience', the path MUST begin with foundational prerequisites.
-        * **Consider Time:** The `estimated_time_days` for each step should be scaled based on `available_time_per_day`. Assume a baseline effort of 4 hours/day for the "typical" duration of a topic. If a user has less time, the days for each step should increase. If more time, days should decrease.
-    2.  **Structure and Content:**
-        * Break down complex topics into digestible sub-topics.
-        * Include a mix of "concept" (theoretical learning), "project" (hands-on application), and "assessment" (knowledge check) type steps.
-        * Suggest practical project ideas to apply learned concepts.
-        * Ensure a logical flow and progression through the topics, building upon previous steps.
-        * The roadmap should have between 5 and 10 distinct steps.
-
-    Ensure the response is ONLY the JSON object, with no conversational text or markdown outside the JSON.
+    Only output the JSON object, with no extra text or formatting.
     """
 
     print(f"Sending prompt to Groq API for aspiration: '{career_aspiration}'")
